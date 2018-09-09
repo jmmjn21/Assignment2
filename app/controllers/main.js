@@ -10,12 +10,13 @@ handlers.hello = function(reqObj, callback){
     callback(200, {message: `Hello ${myName}`})
   }
   else{
-    callback(403, {message: `Method ${reqObj.method} is forbidden, allowed methods [${allowedMethod}]`})
+    callback(405, {message: `Method ${reqObj.method} is forbidden, allowed methods [${allowedMethod}]`})
   }
 }
 
 handlers.notFound = function(reqObj, callback){
   callback(404, {message: 'Operation not found'})
 }
+
 
 module.exports = handlers

@@ -1,6 +1,8 @@
 
 const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
+const crypto = require('crypto')
+const config = require('../config.js')
 
 
 var getRequestObject = function (req, data){
@@ -21,11 +23,107 @@ var getRequestObject = function (req, data){
     queryParams: queryParams,
     pathParams: pathParams,
     headerParams: headerParams,
-    body: body
+    body: parseJsonToObj(body)
   }
   return outputObject
 }
 
+var hash = function(str){
+  if(typeof(str) === 'string' && str.length > 0){
+    let hash = crypto.createHmac('sha256', config.secret).update(str).digest('hex')
+    return hash
+  }
+  else return false
+}
+
+var parseJsonToObj = function(str){
+  try{
+    var obj = JSON.parse(str)
+    return obj
+  }
+  catch(err){
+    return {}
+  }
+}
+
+var validateRequiredField = function(obj, fields){
+  let missing = []
+  fields.map(field =>{
+    if(Object.keys(obj).indexOf(field) === -1) missing.push(field)
+  })
+  return missing
+}
+
+var validateOptionalField = function(obj, fields, optionals){
+return Object.keys(obj).filter(field =>{
+    return fields.indexOf(field) == -1
+  }).filter(field =>{
+    return optionals.indexOf(field) == -1
+  })
+}
+
+var validateFormatField = function(field, value){
+  switch(field) {
+    case 'firstName':
+      if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
+      else return {field: field, value: value, result: false}
+    case 'lastName':
+      if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
+      else return {field: field, value: value, result: false}
+    case 'phone':
+      if(typeof(value) === 'string' && value.trim().length === 10) return {result: true}
+      else return {field: field, value: value, result: false}
+    case 'password':
+      if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
+      else return {field: field, value: value, result: false}
+    case 'tosAgreement':
+      if(typeof(value) === 'boolean' && value === true) return {result: true}
+      else return {field: field, value: value, result: false}
+  }
+}
+
+var checkRequest = function(inputObj, required, optional){
+  const missingArgs = validateRequiredField(inputObj, required)
+  if(missingArgs.length === 0){
+    const tooMuchArgs = validateOptionalField(inputObj, required, optional)
+    if(tooMuchArgs.length === 0){
+      const validationErrors = Object.keys(inputObj).map(field =>{
+        return validateFormatField(field, inputObj[field])
+      }).filter(validation =>{
+        if(validation.result === false) return validation
+      })
+      if(validationErrors.length === 0){
+        return {
+          code: 200,
+          message: `All validation passed`
+        }
+      }
+      else{
+        return {
+          code: 400,
+          message: `Bad Request, validation errors ${JSON.stringify(validationErrors)}`
+        }
+      }
+    }
+    else{
+      return {
+        code: 400,
+        message: `Bad Request, too much arguments ${JSON.stringify(tooMuchArgs)}`
+      }
+    }
+  }
+  else{
+    return {
+      code: 400,
+      message: `Bad Request, missing arguments ${JSON.stringify(missingArgs)}`
+    }
+  }
+}
+
+
 module.exports = {
-  getRequestObject
+  getRequestObject,
+  hash,
+  parseJsonToObj,
+  checkRequest
 }

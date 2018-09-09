@@ -1,6 +1,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const utils = require('../helpers/utils.js')
 
 const baseDir = path.join(__dirname, '../.data')
 
@@ -34,7 +35,12 @@ lib.create = function(dir, file, data, callback){
 
 lib.read = function(dir, file, callback){
   fs.readFile(`${baseDir}/${dir}/${file}.json`, 'utf-8', (err, data) =>{
-    callback(err, data)
+    if(!err){
+      callback(false, utils.parseJsonToObj(data))
+    }
+    else{
+      callback(err, data)
+    }
   })
 }
 
@@ -77,7 +83,7 @@ lib.delete = function(dir, file, callback){
       callback(false)
     }
     else{
-      callback(`<<< Error deleting the file ${file} >>> ${err}`)  
+      callback(`<<< Error deleting the file ${file} >>> ${err}`)
     }
   })
 }
