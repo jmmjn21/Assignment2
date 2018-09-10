@@ -79,6 +79,12 @@ var validateFormatField = function(field, value){
     case 'tosAgreement':
       if(typeof(value) === 'boolean' && value === true) return {result: true}
       else return {field: field, value: value, result: false}
+    case 'id':
+      if(typeof(value) === 'string' && value.trim().length === 20) return {result: true}
+      else return {field: field, value: value, result: false}
+    case 'extend':
+      if(typeof(value) === 'boolean' && value === true) return {result: true}
+      else return {field: field, value: value, result: false}
   }
 }
 
@@ -120,10 +126,26 @@ var checkRequest = function(inputObj, required, optional){
   }
 }
 
+var createRandomString = function(strLength){
+  strLength = typeof(strLength) === 'number' && strLength > 0 ? strLength : false
+  if(strLength){
+    let str = ''
+    for(var i = 0; i<strLength; i++){
+      let randomChar = config.possibleChar.charAt(Math.floor(Math.random() * config.possibleChar.length))
+      str += randomChar
+    }
+    return str
+  }
+  else{
+    return false
+  }
+}
+
 
 module.exports = {
   getRequestObject,
   hash,
   parseJsonToObj,
-  checkRequest
+  checkRequest,
+  createRandomString
 }

@@ -12,6 +12,16 @@ myEnvs.dev = {
   putUserOptionalField: ['firstName', 'lastName', 'password'],
   deleteUserRequiredField: ['phone'],
   deleteUserOptionalField: [],
+  //tokens
+  possibleChar: 'abcdefghijklmnopqrstuvwxyz0123456789',
+  postTokenRequiredField: ['phone', 'password'],
+  postTokenOptionalField: [],
+  getTokenRequiredField: ['id'],
+  getTokenOptionalField: [],
+  putTokenRequiredField: ['id', 'extend'],
+  putTokenOptionalField: [],
+  deleteTokenRequiredField: ['id'],
+  deleteTokenOptionalField: [],
   secret: 'test'
 }
 
@@ -26,6 +36,16 @@ myEnvs.pro = {
   putUserOptionalField: ['firstName', 'lastName', 'password'],
   deleteUserRequiredField: ['phone'],
   deleteUserOptionalField: [],
+  //tokens
+  possibleChar: 'abcdefghijklmnopqrstuvwxyz0123456789',
+  postTokenRequiredField: ['phone', 'password'],
+  postTokenOptionalField: [],
+  getTokenRequiredField: ['id'],
+  getTokenOptionalField: [],
+  putTokenRequiredField: ['id', 'extend'],
+  putTokenOptionalField: [],
+  deleteTokenRequiredField: ['id'],
+  deleteTokenOptionalField: [],
   secret: 'testPro'
 }
 
