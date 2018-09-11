@@ -2,7 +2,7 @@
 
 const config = require('../config.js')
 const utils = require('../helpers/utils.js')
-const tokens = require('./tokens.js')
+const tokenService = require('../services/tokens.js')
 const userService = require('../services/users.js')
 const handlers = {}
 
@@ -37,7 +37,7 @@ handlers._users.get = function(data, callback){
   const status = utils.checkRequest(jsonObj, config.getUserRequiredField, config.getUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokens._tokens.verifyToken(token, jsonObj.phone, (valid) =>{
+    tokenService.verify(token, jsonObj.phone, (valid) =>{
       if(valid){
         userService.get(jsonObj.phone, callback)
       }
@@ -56,7 +56,7 @@ handlers._users.put = function(data, callback){
   const status = utils.checkRequest(jsonObj, config.putUserRequiredField, config.putUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokens._tokens.verifyToken(token, jsonObj.phone, (valid) =>{
+    tokenService.verify(token, jsonObj.phone, (valid) =>{
       if(valid){
         userService.update(jsonObj, callback)
       }
@@ -75,7 +75,7 @@ handlers._users.delete = function(data, callback){
   const status = utils.checkRequest(jsonObj, config.deleteUserRequiredField, config.deleteUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokens._tokens.verifyToken(token, jsonObj.phone, (valid) =>{
+    tokenService.verify(token, jsonObj.phone, (valid) =>{
       if(valid){
         userService.remove(jsonObj.phone, callback)
       }
