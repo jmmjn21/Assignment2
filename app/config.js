@@ -22,6 +22,11 @@ myEnvs.dev = {
   putTokenOptionalField: [],
   deleteTokenRequiredField: ['id'],
   deleteTokenOptionalField: [],
+  twilio: {
+    id: '',
+    token: '',
+    from: ''
+  },
   secret: 'test'
 }
 
@@ -46,6 +51,11 @@ myEnvs.pro = {
   putTokenOptionalField: [],
   deleteTokenRequiredField: ['id'],
   deleteTokenOptionalField: [],
+  twilio: {
+    id: '',
+    token: '',
+    from: ''
+  },
   secret: 'testPro'
 }
 
