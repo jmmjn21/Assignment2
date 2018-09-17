@@ -64,20 +64,17 @@ return Object.keys(obj).filter(field =>{
 
 var validateFormatField = function(field, value){
   switch(field) {
-    case 'firstName':
+    case 'name':
       if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
       else return {field: field, value: value, result: false}
-    case 'lastName':
+    case 'email':
       if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
       else return {field: field, value: value, result: false}
-    case 'phone':
-      if(typeof(value) === 'string' && value.trim().length === 10) return {result: true}
+    case 'street':
+      if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
       else return {field: field, value: value, result: false}
     case 'password':
       if(typeof(value) === 'string' && value.trim().length > 0) return {result: true}
-      else return {field: field, value: value, result: false}
-    case 'tosAgreement':
-      if(typeof(value) === 'boolean' && value === true) return {result: true}
       else return {field: field, value: value, result: false}
     case 'id':
       if(typeof(value) === 'string' && value.trim().length === 20) return {result: true}
@@ -85,6 +82,8 @@ var validateFormatField = function(field, value){
     case 'extend':
       if(typeof(value) === 'boolean' && value === true) return {result: true}
       else return {field: field, value: value, result: false}
+    default:
+      return {result: true}
   }
 }
 

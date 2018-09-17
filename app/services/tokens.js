@@ -4,14 +4,14 @@ const dataService = require('./data.js')
 const utils = require('../helpers/utils.js')
 
 var create = function(userData, callback){
-  dataService.read('users', userData.phone, (err, data) =>{
+  dataService.read('users', userData.email, (err, data) =>{
     if(!err && data){
       let hasedPassword = utils.hash(userData.password)
       if(hasedPassword == data.password){
         let tokenId = utils.createRandomString(20)
         const expires = Date.now() + 1000 * 60 * 60
         const tokenObj = {
-          phone: userData.phone,
+          email: userData.email,
           id: tokenId,
           expires: expires
         }
@@ -29,7 +29,7 @@ var create = function(userData, callback){
       }
     }
     else{
-      callback(400, {message: `User ${userData.phone} not found`})
+      callback(400, {message: `User ${userData.email} not found`})
     }
   })
 }
@@ -88,10 +88,10 @@ var remove = function(tokenId, callback){
   })
 }
 
-var verify = function(id, phone, callback){
+var verify = function(id, email, callback){
   dataService.read('tokens', id, (err, data) =>{
     if(!err && data){
-      if(data.phone === phone && data.expires > Date.now()){
+      if(data.email === email && data.expires > Date.now()){
         callback(true)
       }
       else{

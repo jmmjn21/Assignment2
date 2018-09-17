@@ -17,7 +17,7 @@ var sendMessage = function(phone, msg, callback){
     var strPayload = queryString.stringify(payload)
 
     const requestDetails = {
-      protocol: 'https',
+      protocol: 'https:',
       hostname: 'api.twilio.com',
       method: 'POST',
       path: `/2010-04-01/Accounts/${config.twilio.id}/Messages.json`,

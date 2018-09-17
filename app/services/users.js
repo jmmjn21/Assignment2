@@ -4,13 +4,13 @@ const dataService = require('./data.js')
 const utils = require('../helpers/utils.js')
 
 var create = function(userData, callback){
-  dataService.read('users', userData.phone, (err, data) =>{
+  dataService.read('users', userData.email, (err, data) =>{
     if(err){
       let hasedPassword = utils.hash(userData.password)
       if(hasedPassword){
         userData.password = hasedPassword
 
-        dataService.create('users', userData.phone, userData, (err) =>{
+        dataService.create('users', userData.email, userData, (err) =>{
           if(!err){
             callback(200, {message: `User created succesfully`})
           }
@@ -24,13 +24,13 @@ var create = function(userData, callback){
       }
     }
     else{
-      callback(400, {message: `User ${userData.phone} already exists`})
+      callback(400, {message: `User ${userData.email} already exists`})
     }
   })
 }
 
-var get = function(userPhone, callback){
-  dataService.read('users', userPhone, (err, data) =>{
+var get = function(userId, callback){
+  dataService.read('users', userId, (err, data) =>{
     if(!err && data){
       delete data.password
       callback(200, data)
@@ -42,17 +42,19 @@ var get = function(userPhone, callback){
 }
 
 var update = function(userNewData, callback){
-  dataService.read('users', userNewData.phone, (err, data) =>{
+  dataService.read('users', userNewData.email, (err, data) =>{
     if(err){
       callback(404, {message: `User not found`})
     }
     else{
       const updateData = data
-      if(userNewData.firstName) updateData.firstName = userNewData.firstName
-      if(userNewData.lastName) updateData.lastName = userNewData.lastName
+      if(userNewData.name) updateData.name = userNewData.name
+      if(userNewData.street) updateData.street = userNewData.street
       if(userNewData.password) updateData.password = utils.hash(userNewData.password)
+      if(userNewData.cart) updateData.cart = userNewData.cart
+      if(userNewData.orders) updateData.orders = userNewData.orders
 
-      dataService.update('users', userNewData.phone, updateData, (err) =>{
+      dataService.update('users', userNewData.email, updateData, (err) =>{
         if(!err){
           callback(200, {message: `User updated succesfully`})
         }
@@ -64,10 +66,10 @@ var update = function(userNewData, callback){
   })
 }
 
-var remove = function(userPhone, callback){
-  dataService.read('users', userPhone, (err, data) =>{
+var remove = function(userId, callback){
+  dataService.read('users', userId, (err, data) =>{
     if(!err && data){
-      dataService.delete('users', userPhone, (err) =>{
+      dataService.delete('users', userId, (err) =>{
         if(!err){
           callback(200, {message: `User deleted succesfully`})
         }

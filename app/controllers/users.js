@@ -37,9 +37,9 @@ handlers._users.get = function(data, callback){
   const status = utils.checkRequest(jsonObj, config.getUserRequiredField, config.getUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokenService.verify(token, jsonObj.phone, (valid) =>{
+    tokenService.verify(token, jsonObj.email, (valid) =>{
       if(valid){
-        userService.get(jsonObj.phone, callback)
+        userService.get(jsonObj.email, callback)
       }
       else{
         callback(403, {message: `Invalid token`})
@@ -56,7 +56,7 @@ handlers._users.put = function(data, callback){
   const status = utils.checkRequest(jsonObj, config.putUserRequiredField, config.putUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokenService.verify(token, jsonObj.phone, (valid) =>{
+    tokenService.verify(token, jsonObj.email, (valid) =>{
       if(valid){
         userService.update(jsonObj, callback)
       }
@@ -75,9 +75,9 @@ handlers._users.delete = function(data, callback){
   const status = utils.checkRequest(jsonObj, config.deleteUserRequiredField, config.deleteUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokenService.verify(token, jsonObj.phone, (valid) =>{
+    tokenService.verify(token, jsonObj.email, (valid) =>{
       if(valid){
-        userService.remove(jsonObj.phone, callback)
+        userService.remove(jsonObj.email, callback)
       }
       else{
         callback(403, {message: `Invalid token`})
