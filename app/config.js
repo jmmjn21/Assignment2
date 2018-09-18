@@ -22,6 +22,9 @@ myEnvs.dev = {
   putTokenOptionalField: [],
   deleteTokenRequiredField: ['id'],
   deleteTokenOptionalField: [],
+  //orders
+  postOrderRequiredField: ['email'],
+  postOrderOptionalField: [],
   twilio: {
     id: '',
     token: '',
@@ -51,6 +54,9 @@ myEnvs.pro = {
   putTokenOptionalField: [],
   deleteTokenRequiredField: ['id'],
   deleteTokenOptionalField: [],
+  //orders
+  postOrderRequiredField: ['email'],
+  postOrderOptionalField: [],
   twilio: {
     id: '',
     token: '',

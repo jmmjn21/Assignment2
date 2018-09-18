@@ -82,6 +82,12 @@ var validateFormatField = function(field, value){
     case 'extend':
       if(typeof(value) === 'boolean' && value === true) return {result: true}
       else return {field: field, value: value, result: false}
+    case 'cart':
+      if(typeof(value) === 'object') return {result: true}
+      else return {field: field, value: value, result: false}
+    case 'orders':
+      if(typeof(value) === 'object') return {result: true}
+      else return {field: field, value: value, result: false}
     default:
       return {result: true}
   }

@@ -2,24 +2,27 @@
 module.exports = {
   menus: [
     {
+      id: 1,
       first: 'potato',
       second: 'jam',
       dessert: 'ice cream',
-      vale: 50,
+      value: 50,
       currency: 'EUR'
     },
     {
+      id: 2,
       first: 'hamburger',
       second: 'bacon',
       dessert: 'grapes',
-      vale: 70,
+      value: 70,
       currency: 'EUR'
     },
     {
+      id: 3,
       first: 'salad',
       second: 'fish',
       dessert: 'raspberry',
-      vale: 10,
+      value: 10,
       currency: 'EUR'
     }
   ]
