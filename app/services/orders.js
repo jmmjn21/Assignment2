@@ -2,6 +2,8 @@
 const config = require('../config.js')
 const utils = require('../helpers/utils.js')
 const dataService = require('./data.js')
+const paymentService = require('./payment.js')
+const mailService = require('./mail.js')
 
 var create = function(userNewData, callback){
   dataService.read('users', userNewData.email, (err, data) =>{
@@ -20,18 +22,26 @@ var create = function(userNewData, callback){
       let newOrder = {
         id: orderId,
         menus: menuView,
-        total: total
+        total: total,
+        currency: 'EUR'
       }
-      data.cart = []
-      data.orders.push(newOrder)
-      dataService.update('users', userNewData.email, data, (err) =>{
-        if(!err){
-          //TODO e-mail notification integration
-          callback(200, {message: `User updated succesfully`})
-        }
-        else{
-          callback(500, {message: `Error updating user ${JSON.stringify(err)}`})
-        }
+      paymentService.pay(newOrder.total, newOrder.currency)
+      .then(() =>{
+        data.cart = []
+        data.orders.push(newOrder)
+        dataService.update('users', userNewData.email, data, (err) =>{
+          if(!err){
+            mailService.sendEmail('test@gmail.com', 'testing', 'saludando')
+            callback(200, {message: `Orderder processed succesfully`})
+          }
+          else{
+            callback(500, {message: `Error updating user ${JSON.stringify(err)}`})
+          }
+        })
+      })
+      .catch(err =>{
+        console.log(err)
+        callback(500, {message: `Error with the payment ${JSON.stringify(err)}`})
       })
     }
   })

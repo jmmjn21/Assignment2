@@ -30,6 +30,16 @@ myEnvs.dev = {
     token: '',
     from: ''
   },
+  stripe: {
+    url: 'api.stripe.com',
+    path: '/v1/charges',
+    apiKey: 'sk_test_********'
+  },
+  mailgun: {
+    url: 'api.mailgun.net',
+    domain: '********.com',
+    apiKey: '***********-0e6e8cad-3cd17d86'
+  },
   secret: 'test'
 }
 
@@ -61,6 +71,16 @@ myEnvs.pro = {
     id: '',
     token: '',
     from: ''
+  },
+  stripe: {
+    url: 'api.stripe.com',
+    path: '/v1/charges',
+    apiKey: 'sk_test_Wh************8m'
+  },
+  mailgun: {
+    url: 'api.mailgun.net',
+    domain: '********.com',
+    apiKey: '**********-***-**'
   },
   secret: 'testPro'
 }
