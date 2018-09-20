@@ -54,10 +54,13 @@ handlers._tokens.put = function(data, callback){
 }
 
 handlers._tokens.delete = function(data, callback){
-  let jsonObj = data.queryParams
+  const pathParams = {
+    id_token: data.pathParams[1]
+  }
+  let jsonObj = pathParams
   const status = utils.checkRequest(jsonObj, config.deleteTokenRequiredField, config.deleteTokenOptionalField)
   if(status.code === 200){
-    tokenService.remove(jsonObj.id, callback)
+    tokenService.remove(jsonObj.id_token, callback)
   }
   else{
     callback(status.code, {message: status.message})

@@ -12,7 +12,7 @@ var create = function(userData, callback){
 
         dataService.create('users', userData.email, userData, (err) =>{
           if(!err){
-            callback(200, {message: `User created succesfully`})
+            callback(200, {id: userData.email})
           }
           else{
             callback(500, {message: `Error creating user ${JSON.stringify(err)}`})

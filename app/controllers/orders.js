@@ -22,11 +22,14 @@ handlers._orders = {}
 
 
 handlers._orders.post = function(data, callback){
-  let jsonObj = data.body
+  const pathParams = {
+    id_user: data.pathParams[1]
+  }
+  let jsonObj = pathParams
   const status = utils.checkRequest(jsonObj, config.postOrderRequiredField, config.postOrderOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokenService.verify(token, jsonObj.email, (valid) =>{
+    tokenService.verify(token, jsonObj.id_user, (valid) =>{
       if(valid){
         orderService.create(jsonObj, callback)
       }

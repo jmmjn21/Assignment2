@@ -17,7 +17,7 @@ var create = function(userData, callback){
         }
         dataService.create('tokens', tokenId, tokenObj, (err) =>{
           if(!err){
-            callback(200, tokenObj)
+            callback(200, {token: tokenId})
           }
           else{
             callback(500, {message: `Error creating token`})

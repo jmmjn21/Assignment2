@@ -22,9 +22,12 @@ handlers._users = {}
 
 
 handlers._users.post = function(data, callback){
-  const jsonObj = data.body
+  let jsonObj = data.body
+
   const status = utils.checkRequest(jsonObj, config.postUserRequiredField, config.postUserOptionalField)
   if(status.code === 200){
+    jsonObj.cart = []
+    jsonObj.orders = []
     userService.create(jsonObj, callback)
   }
   else{
@@ -33,13 +36,16 @@ handlers._users.post = function(data, callback){
 }
 
 handlers._users.get = function(data, callback){
-  let jsonObj = data.queryParams
+  const pathParams = {
+    id_user: data.pathParams[1]
+  }
+  let jsonObj = pathParams
   const status = utils.checkRequest(jsonObj, config.getUserRequiredField, config.getUserOptionalField)
   if(status.code === 200){
     let token = typeof(data.headerParams.token) === 'string' ? data.headerParams.token : false
-    tokenService.verify(token, jsonObj.email, (valid) =>{
+    tokenService.verify(token, jsonObj.id_user, (valid) =>{
       if(valid){
-        userService.get(jsonObj.email, callback)
+        userService.get(jsonObj.id_user, callback)
       }
       else{
         callback(403, {message: `Invalid token`})

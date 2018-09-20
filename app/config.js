@@ -5,11 +5,11 @@ myEnvs.dev = {
   port: 3000,
   //users
   postUserRequiredField: ['name', 'email', 'street', 'password'],
-  postUserOptionalField: ['cart', 'orders'],
-  getUserRequiredField: ['email'],
+  postUserOptionalField: [],
+  getUserRequiredField: ['id_user'],
   getUserOptionalField: [],
   putUserRequiredField: ['email'],
-  putUserOptionalField: ['name', 'street', 'password', 'cart', 'orders'],
+  putUserOptionalField: ['name', 'street', 'password', 'cart'],
   deleteUserRequiredField: ['email'],
   deleteUserOptionalField: [],
   //tokens
@@ -20,10 +20,10 @@ myEnvs.dev = {
   getTokenOptionalField: [],
   putTokenRequiredField: ['id', 'extend'],
   putTokenOptionalField: [],
-  deleteTokenRequiredField: ['id'],
+  deleteTokenRequiredField: ['id_token'],
   deleteTokenOptionalField: [],
   //orders
-  postOrderRequiredField: ['email'],
+  postOrderRequiredField: ['id_user'],
   postOrderOptionalField: [],
   twilio: {
     id: '',
@@ -47,11 +47,11 @@ myEnvs.pro = {
   port: 5000,
   //users
   postUserRequiredField: ['name', 'email', 'street', 'password'],
-  postUserOptionalField: ['cart', 'orders'],
-  getUserRequiredField: ['email'],
+  postUserOptionalField: [],
+  getUserRequiredField: ['id_user'],
   getUserOptionalField: [],
   putUserRequiredField: ['email'],
-  putUserOptionalField: ['name', 'street', 'password', 'cart', 'orders'],
+  putUserOptionalField: ['name', 'street', 'password', 'cart'],
   deleteUserRequiredField: ['email'],
   deleteUserOptionalField: [],
   //tokens
@@ -62,10 +62,10 @@ myEnvs.pro = {
   getTokenOptionalField: [],
   putTokenRequiredField: ['id', 'extend'],
   putTokenOptionalField: [],
-  deleteTokenRequiredField: ['id'],
+  deleteTokenRequiredField: ['id_token'],
   deleteTokenOptionalField: [],
   //orders
-  postOrderRequiredField: ['email'],
+  postOrderRequiredField: ['id_user'],
   postOrderOptionalField: [],
   twilio: {
     id: '',

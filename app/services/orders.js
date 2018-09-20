@@ -6,12 +6,11 @@ const paymentService = require('./payment.js')
 const mailService = require('./mail.js')
 
 var create = function(userNewData, callback){
-  dataService.read('users', userNewData.email, (err, data) =>{
+  dataService.read('users', userNewData.id_user, (err, data) =>{
     if(err){
       callback(404, {message: `User not found`})
     }
     else{
-      //TODO payment integration
       let orderId = utils.createRandomString(20)
       let total = 0;
       let menuView = data.cart.map(menu =>{
@@ -29,7 +28,7 @@ var create = function(userNewData, callback){
       .then(() =>{
         data.cart = []
         data.orders.push(newOrder)
-        dataService.update('users', userNewData.email, data, (err) =>{
+        dataService.update('users', userNewData.id_user, data, (err) =>{
           if(!err){
             mailService.sendEmail('test@gmail.com', 'testing', 'saludando')
             callback(200, {message: `Orderder processed succesfully`})

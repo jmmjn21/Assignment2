@@ -1,0 +1,277 @@
+swagger: "2.0"
+info:
+  description: "This is a restaurant"
+  version: "1.0.0"
+  title: "Assignament 2"
+basePath: "/"
+
+schemes:
+- "https"
+- "http"
+paths:
+  /users:
+    post:
+      tags:
+      - "user"
+      summary: "Create a new user"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User data"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          $ref: "#/definitions/PostUserResponse"
+        400:
+          description: "Invalid input"
+
+    put:
+      tags:
+      - "user"
+      summary: "Update user data"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User data"
+        required: true
+        schema:
+          $ref: "#/definitions/UserComplete"
+      - in: "header"
+        name: "token"
+        description: "Token authorization"
+        type: string
+        required: true
+      responses:
+        200:
+          $ref: "#/definitions/UserComplete"
+        400:
+          description: "Invalid input"
+
+  /users/{id_user}:
+    get:
+      tags:
+      - "user"
+      summary: "Get user data"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id_user"
+        description: "user email"
+        type: string
+        required: true
+      - in: "header"
+        name: "token"
+        description: "Token authorization"
+        type: string
+        required: true
+      responses:
+        200:
+          $ref: "#/definitions/UserGet"
+        400:
+          description: "Invalid input"
+
+
+
+  /tokens:
+    post:
+      tags:
+      - "login"
+      summary: "Create a new token for the user"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User credentials"
+        required: true
+        schema:
+          $ref: "#/definitions/Token"
+      responses:
+        200:
+          $ref: "#/definitions/TokenPost"
+        400:
+          description: "Invalid input"
+
+  /tokens/{id_token}:
+    delete:
+      tags:
+      - "login"
+      summary: "Delete a token"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id_token"
+        description: "User token identifier"
+        type: string
+        required: true
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Invalid input"
+
+  /menus/{id_user}:
+    get:
+      tags:
+      - "menu"
+      summary: "Get all the menus for a logged user"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id_user"
+        description: "User email"
+        type: string
+        required: true
+      - in: "header"
+        name: "token"
+        description: "Token authorization"
+        type: string
+        required: true
+      responses:
+        200:
+          $ref: "#/definitions/Menus"
+        400:
+          description: "Invalid input"
+
+  /orders/{id_user}:
+    post:
+      tags:
+      - "order"
+      summary: "Create a new order for an user with the cart items"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id_user"
+        description: "user email"
+        type: string
+        required: true
+      - in: "header"
+        name: "token"
+        description: "Token authorization"
+        type: string
+        required: true
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Invalid input"
+
+
+
+
+definitions:
+
+  User:
+    type: "object"
+    required:
+    - "name"
+    - "email"
+    - "street"
+    - "password"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      street:
+        type: "string"
+      password:
+        type: "string"
+
+  UserComplete:
+    type: "object"
+    required:
+    - "email"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      street:
+        type: "string"
+      password:
+        type: "string"
+      cart:
+        items:
+          type: object
+
+  UserGet:
+    type: "object"
+    required:
+    - "email"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      street:
+        type: "string"
+      password:
+        type: "string"
+      cart:
+        items:
+          type: object
+      orders:
+        items:
+          type: object
+
+  Token:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+
+  TokenPost:
+    type: "object"
+    required:
+    - "token"
+    properties:
+      token:
+        type: "string"
+  
+  PostUserResponse:
+    type: "object"
+    properties:
+      id:
+        type: string
+
+  Menus:
+    items:
+      type: object
+      

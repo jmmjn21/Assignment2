@@ -1,0 +1,296 @@
+{
+	"id": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+	"name": "assignament2",
+	"description": "",
+	"order": [
+		"7a5f7477-eb41-a341-42a4-add647e08ee3",
+		"e17a89c0-455f-4573-50e1-f3bcee5e04f2",
+		"219d5c96-5308-3ad5-a202-ab1d972b73fe",
+		"0d0d8d44-1537-75f3-8c5c-9c97f7431c50",
+		"045ec623-bbe2-a731-795e-262b2d684b79",
+		"8f17213a-5a73-6359-fa19-751cfacc622c",
+		"567cfb28-b0f3-711f-9413-59d564398779",
+		"6b3a665b-a03d-02d0-8358-209810b7a9e8",
+		"9f9b957d-c556-ca45-f91f-4e46bc8cece9"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1537471325806,
+	"owner": "441232",
+	"public": false,
+	"requests": [
+		{
+			"id": "045ec623-bbe2-a731-795e-262b2d684b79",
+			"headers": "Content-Type: application/json\ntoken: {{id_token}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "{{id_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/users",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537471806587,
+			"name": "3 - addToCart",
+			"description": "",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"javier\",\n\t\"email\": \"mansilla\",\n\t\"password\": \"12345\",\n\t\"cart\":[\n    {\n        \"id\": 1,\n        \"first\": \"potato\",\n        \"second\": \"jam\",\n        \"dessert\": \"ice cream\",\n        \"value\": 50,\n        \"currency\": \"EUR\"\n    },\n    {\n        \"id\": 2,\n        \"first\": \"hamburger\",\n        \"second\": \"bacon\",\n        \"dessert\": \"grapes\",\n        \"value\": 70,\n        \"currency\": \"EUR\"\n    },\n    {\n        \"id\": 3,\n        \"first\": \"salad\",\n        \"second\": \"fish\",\n        \"dessert\": \"raspberry\",\n        \"value\": 10,\n        \"currency\": \"EUR\"\n    }\n]\n\t\n}"
+		},
+		{
+			"id": "0d0d8d44-1537-75f3-8c5c-9c97f7431c50",
+			"headers": "token: {{id_token}}\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "{{id_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/menus/{{id_user}}",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"data": null,
+			"dataMode": "params",
+			"name": "2 - getMenus",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1537471602510,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "219d5c96-5308-3ad5-a202-ab1d972b73fe",
+			"headers": "token: {{id_token}}\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "{{id_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/users/{{id_user}}",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"data": null,
+			"dataMode": "params",
+			"name": "2 - getUser",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1537471566039,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "567cfb28-b0f3-711f-9413-59d564398779",
+			"headers": "Content-Type: application/json\ntoken: {{id_token}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "token",
+					"value": "{{id_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/orders/{{id_user}}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537471828503,
+			"name": "5 - createOrderWithCart",
+			"description": "",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "6b3a665b-a03d-02d0-8358-209810b7a9e8",
+			"headers": "token: {{id_token}}\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "{{id_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/users/{{id_user}}",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"data": null,
+			"dataMode": "params",
+			"name": "6 - getUserOrder",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1537471656752,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "7a5f7477-eb41-a341-42a4-add647e08ee3",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/users",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "try{\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n    var data = JSON.parse(responseBody);\n    console.log(data);\n    postman.setEnvironmentVariable(\"id_user\", data.id);\n}\ncatch(err){\n    console.log(err);\n}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1537471433052,
+			"name": "0 - CreateUser",
+			"description": "",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"pepito\",\n\t\"email\": \"mansilla\",\n\t\"street\": \"1610415022\",\n\t\"password\": \"12345\"\n}"
+		},
+		{
+			"id": "8f17213a-5a73-6359-fa19-751cfacc622c",
+			"headers": "token: {{id_token}}\n",
+			"headerData": [
+				{
+					"key": "token",
+					"value": "{{id_token}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/users/{{id_user}}",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"data": null,
+			"dataMode": "params",
+			"name": "4 - getUserCart",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1537471656752,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "9f9b957d-c556-ca45-f91f-4e46bc8cece9",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:3000/tokens/{{id_token}}",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "DELETE",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"data": null,
+			"dataMode": "params",
+			"name": "7 - logout",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1537471766155,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "e17a89c0-455f-4573-50e1-f3bcee5e04f2",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:3000/tokens",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "25f58d86-b8a8-9b79-939b-c7561602fe25",
+			"data": [],
+			"dataMode": "raw",
+			"name": "1 - login",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1537471542924,
+			"version": 2,
+			"responses": [],
+			"tests": "try{\n    tests[\"Status code is 200\"] = responseCode.code === 200;\n    var data = JSON.parse(responseBody);\n    console.log(data);\n    postman.setEnvironmentVariable(\"id_token\", data.token);\n}\ncatch(err){\n    console.log(err);\n}",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"email\": \"mansilla\",\n\t\"password\": \"12345\"\n\t\n}"
+		}
+	]
+}
