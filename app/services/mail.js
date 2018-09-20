@@ -1,7 +1,7 @@
 
-const https = require('https')
-const querystring = require('querystring');
 const config = require('../config.js')
+const request = require('../helpers/request')
+const querystring = require('querystring');
 
 var sendEmail = function(to, subject, text) {
   return new Promise ( (resolve, reject) => {
@@ -25,31 +25,13 @@ var sendEmail = function(to, subject, text) {
         'Content-Length' : Buffer.byteLength(payloadString)
       }
     };
-
-    const req = https.request(requestDetails, res => {
-      // grab response status
-      const status = res.statusCode;
-
-      let responseBodyString = '';
-      res.on('data', chunk => {
-        responseBodyString += chunk;
-        if (status == 200 || status == 201) {
-          resolve({'success' : true, 'responseBody' : JSON.parse(responseBodyString)});
-        } else {
-          resolve({'success' : false, 'responseBody' : JSON.parse(responseBodyString)});
-        }
-      });
-    });
-
-    // Bind request to err event
-    req.on('error', (err) => {
-      reject(err);
-    });
-
-    req.write(payloadString);
-
-    req.end();
-
+    request.sendRequest(requestDetails, payloadString)
+    .then(res =>{
+      resolve(res)
+    })
+    .catch(err =>{
+      reject(err)
+    })
   });
 };
 
